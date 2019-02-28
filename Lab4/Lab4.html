@@ -1,0 +1,65 @@
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+      <title>Lab</title>
+      <link rel="StyleSheet" type="text/css" href="../../style.css" />
+   </head>
+   <body>
+
+<h2>Lab</h2>
+
+Zadanie jest kontynuacją poprzedniego zadania.
+
+<p>
+Zadanie polega na stworzeniu analizatora błędów semantycznych.
+
+<p>
+Analizator semantyczny powinien wykrywać m.in. następujące błędy semantyczne:
+
+<ul>
+<li>inicjalizacja macierzy przy użyciu wektorów o różnych rozmiarach
+<li>odwołania poza zakres macierzy (w przypadku indeksów będących stałymi)
+<li>dla danej operacji binarnej użycie stałej, skalara, wektora lub macierzy o niekompatybilnych typach lub rozmiarze, np.
+    <ul>
+    <li>dodawanie skalara lub wektora do macierzy
+	<li>operacje binarne na wektorach lub macierzach o niekompatybilnych wymiarach
+    </ul>
+<li>użycie funkcji inicjalizujących (funkcje <code>eye, zeros, ones</code>) z niepoprawnymi parametrami
+<li>niepoprawne użycie instrukcji:
+    <ul>
+    <li>instrukcje <code>break</code> lub <code>continue</code> poza pętlą
+    </ul>
+</ul>
+
+</p>
+
+
+<p>
+Analiza błędów semantycznych nie powinna być przerywana po napotkaniu pierwszego błędu,
+lecz wykrywać jak największą liczbę błędów.
+Z każdym błędem powinna być skojarzona informacja o miejscu wystąpienia błędu (nr linii, ew. numer kolumny).
+</p>
+
+
+
+<p>
+Do implementacji zadania należy skorzystać z wzorca <i>visitor</i>.
+W tym celu w klasie <code>TypeChecker</code> należy zdefiniować metody <code>visit_&lt;classname&gt;</code>, każdej klasie z AST będzie odpowiadała jedna metoda.
+Omówienie wzorca wizytor można znaleźć w <i>A. Allen, Modern Compiler Implementation in Java, 2nd ed., Chapt. 4</i>.
+</p>
+
+
+<p>
+Do stworzenia analizatora semantycznego można wykorzystać pliki:
+<ul>
+<li> <a href="main.py">main.py</a>
+<li> <a href="SymbolTable.py">SymbolTable.py</a>
+<li> <a href="TypeChecker.py">TypeChecker.py</a>, nie wymaga dodania metody <code>accept</code> w klasie <code>AST.Node</code>
+</ul>
+
+<p>
+Przykładowe błędne programy:
+<a href="errs/control_transfer.m">control_transfer.m</a>, <a href="errs/init.m">init.m</a>, <a href="errs/opers.m">opers.m</a>
+
+</body>
+</html>

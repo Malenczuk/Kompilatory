@@ -1,0 +1,68 @@
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html; charset=iso-8859-2">
+      <title>Lab</title>
+      <link rel="StyleSheet" type="text/css" href="../../style.css" />
+   </head>
+   <body>
+
+<h2>Lab</h2>
+
+Zadanie jest kontynuacją poprzedniego zadania.
+
+<p>
+Zadanie polega na stworzeniu interpretera języka wyspecyfikowanego w poprzednich zajęciach.
+Interpretacja powinna być wykonywana tylko wtedy, gdy poprzednie etapy zakończyły się sukcesem --
+nie wystąpiły żadne błędy syntaktyczne lub semantyczne.
+
+
+<h4>Implementacja</h4>
+<p>
+Do implementacji zadania należy wykorzystać wzorzec <i>visitor</i>.
+Tym razem nie będziemy używać implementacji z poprzednich zajęć
+(dla każdej klasy z AST definicja funkcji <code>vistit_&lt;classname&gt;</code> w odpowiednim wizytorze),
+lecz należy użyć implementacji opartej na dekoratorach.
+W tym celu w wizytorze <code>Interpreter</code> należy dla każdej klasy z AST zdefiniować metodę <code>visit</code>,
+dekorowaną nazwą tej klasy.
+</p>                                                                                                
+
+
+<h4>Pamięć interpretera</h4>
+<p>
+Poza trywialnym przypadkiem jednego, globalnego zakresu, bieżące wartości zmiennych nie mogą być przechowywane w tablicy symboli.
+W pozostałych przypadkach potrzebna jest osobna pamięć interpretera o strukturze stosu.
+<!--Przydatne będzie rozróżnienie na pamięć globalną i funkcyjną:-->
+<ul>
+<li>Pamięć globalna <code>globalMemory</code> służy do przechowywania wartości zmiennych w zakresie globalnym i jego zakresach potomnych niefunkcyjnych. Pamięć ta możę zostać zaimplementowana jako instacja klasy <code>MemoryStack</code>.
+<!--
+<li><code>functionMemory</code> - pamięć do przechowywania wartości zmiennych wszystkich wywołań funkcji.
+Pamięć ta jest potrzebna, jeśli w języku występują definicje i wywoływania funkcji (potencjalnie dowolny poziom zagnieżdzenia wywołań funkcji)
+-->
+</ul>
+
+
+</p>
+
+
+<h4>Przekazywanie sterowania</h4>
+<p>
+Do zaimplementowania przekazywania sterowania z instrukcji <code>break</code>,  <code>continue</code>
+nie wystarczy użycie zwykłej instrukcji <code>return</code>, gdyż wspomniane instrukcje mogą być zagnieżdzone dowolnie głęboko w pętli.
+
+Zamiast tego należy posłużyć się mechanizmem wyjątków:
+zgłaszanie wyjątku przy interpretacji instrukcji <code>break</code> lub <code>continue</code>
+oraz jego przechwytywanie w funkcjach <code>visit</code> interpretujących pętle (oraz w funkcji <code>visit</code> interpretującej wywołanie funkcji, jeśli język umożliwia definiowanie i wywoływanie funkcji).
+</p>
+
+
+<p>
+Do stworzenia interpretera można wykorzystać pliki:
+<ul>
+<li> <a href="visit.py">visit.py</a> [Imlementation of visitor pattern <a href="http://curtis.schlak.com/2013/06/20/follow-up-to-python-visitor-pattern.html"> of Curtis Schlak</a>]
+<li> <a href="Interpreter.py">Interpreter.py</a>
+<li> <a href="Memory.py">Memory.py</a>
+<li> <a href="Exceptions.py">Exceptions.py</a>
+<li> <a href="main.py">main.py</a>
+</body>
+</html>
+

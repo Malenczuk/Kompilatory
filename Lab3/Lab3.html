@@ -1,0 +1,112 @@
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html; charset=iso-8859-2">
+      <title>Lab</title>
+      <link rel="StyleSheet" type="text/css" href="../../style.css" />
+   </head>
+   <body>
+
+<h2>Lab 3</h2>
+
+
+<p>
+Zadanie polega na stworzeniu i wypisaniu abstrakcyjnego drzewa składni (ang. abstract syntax tree, AST).
+
+Drzewo składni powinno uwzględniać w swoich węzłach następujące konstrukcje:
+<UL>
+<LI> wyrażenia binarne,
+<LI> wyrażenia relacyjne,
+<LI> instrukcje przypisania,
+<LI> instrukcje warunkowe <code>if-else</code>,
+<LI> pętle: <code>while</code> oraz <code>for</code>,
+<LI> instrukcje <code>break</code>, <code>continue</code> oraz <code>return</code>,
+<LI> instrukcje <code>print</code>,
+<LI> instrukcje złożone,
+<LI> tablice oraz ich zakresy.
+</UL>
+
+
+<p>
+Przykładowo, dla poniższego <a href="example.txt">kodu</a>:
+
+<pre class="code">
+A = zeros(5); # create 5x5 matrix filled with zeros
+D = A.+B' ;   # add element-wise A with transpose of B
+
+for j = 1:10 
+    print j;
+</pre>
+
+translator powinien stworzyć odpowiadające mu drzewo składni (AST) oraz wypisać jego tekstową reprezentację
+na standardowym wyjściu:
+
+<pre class="code">
+=
+|  A
+|  zeros
+|  |  5
+=
+|  D
+|  .+
+|  |  A
+|  |  TRANSPOSE
+|  |  |  B
+FOR
+|  j
+|  RANGE
+|  |  1
+|  |  10
+|  PRINT
+|  |  j
+</pre>
+
+
+Przykładowe pliki wejściowe: <a href="example1.m">example1.m</a>, <a href="example2.m">example2.m</a>, <a href="example3.m">example3.m</a>
+
+<br>
+oraz odpowiadające wyjściowe drzewa składni:
+<a href="example1.tree">example1.tree</a>, <a href="example2.tree">example2.tree</a>, <a href="example3.tree">example3.tree</a>
+
+</p>
+
+
+<ul>
+
+<li>Do rozwiązania zadania można użyć generatora parserów <code>PLY</code>.
+
+<li>Rozpoznawany język powinien być zgodny ze stworzoną gramatyką.
+Obecność białych znaków, sposób sformatowania tekstu nie ma wpływu na postać drzewa.
+
+<li>Drzewo abstrakcyjne składni (AST) powinno być wypisywane tylko dla syntaktycznie poprawnego wejścia.
+
+<li>Translator powinien wykrywać niepoprawne syntaktycznie wejście.
+W takim przypadku lepiej nie tworzyć drzewa syntaktycznego,
+ale dla niepoprawnych linii wypisywać numer linii wraz z informacją że wystąpił błąd.
+
+
+<li>Do stworzenia translatora, można użyć poprzednio stworzonych plików scanner.py, Mparser.py.
+Nowe pliki, które zostaną stworzone, to <a href="AST.py">AST.py</a>, <a href="TreePrinter.py">TreePrinter.py</a>
+oraz <a href="main.py">main.py</a>..
+
+<li>W trakcie parsingu należy stworzyć drzewo syntaktyczne.
+Różnica między (konkretnym) drzewem parsingu (ang. <i>parse tree</i>) a 
+(abstrakcyjnym) drzewem syntaktycznym (ang. <i>syntax tree</i>) opisana jest
+<a href="http://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees">tutaj</a>.
+
+<li>W zależności od rodzaju nieterminala należy zdefiniować specyficzne dla nich klasy lub struktury danych
+(stała, zmienna, przypisanie, wyrażenie arytmetyczne, wyrażenie porównania, instrukcja warunkowa, lista instrukcji, itp.).
+
+<li>Dla każdej klasy należy zdefiniować funkcję <code>printTree</code> wypisującą 
+odpowiadającą danemu węzłowi część drzewa syntaktycznego.
+
+<li>Wszystkie funkcje <code>printTree</code> należy zdefiniować odpowiednio w klasie <code>TreePrinter</code>.
+Funkcje te zostaną zainstalowane w klasach odpowiadającym węzłom drzewa abstrakcyjnego
+przy pomocy dekoratora <code>@addToClass</code>.
+<a href="https://www.matthieuamiguet.ch/media/documents/TeachingCompilersWithPython_Paper.pdf"><code>@addToClass</code></a>.
+Dekoratory opisane są szczegółowo w <i>M. Lutz, Learning Python, 4th Ed., Chapt. 38</i>.
+
+</p>
+
+
+</body>
+</html>

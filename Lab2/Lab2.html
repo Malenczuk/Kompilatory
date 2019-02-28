@@ -1,0 +1,72 @@
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html; charset=iso-8859-2">
+      <title>Lab</title>
+      <link rel="StyleSheet" type="text/css" href="../../style.css" />
+   </head>
+   <body>
+
+<h2>Lab 2</h2>
+
+
+<p>
+Zadanie polega na stworzeniu parsera, który powinien akceptować kod źródłowy w formie tokenów i tworzyć drzewo syntaktyczne.
+
+Parser powinien rozpoznawać następujące konstrukcje:
+<UL>
+<LI> wyrażenia binarne, w tym operacje macierzowe 'element po elementcie'
+<LI> wyrażenia relacyjne,
+<LI> negację unarną,
+<LI> transpozycję macierzy,
+<LI> inicjalizację macierzy konkretnymi wartościami,
+<LI> macierzowe funkcje specjalne,
+<LI> instrukcję przypisania, w tym różne operatory przypisania
+<LI> instrukcję warunkową <code>if-else</code>,
+<LI> pętle: <code>while</code> and <code>for</code>,
+<LI> instrukcje <code>break</code>, <code>continue</code> oraz <code>return</code>,
+<LI> instrukcję <code>print</code>,
+<LI> instrukcje złożone,
+<LI> tablice oraz ich zakresy.
+</UL>
+
+
+<p>
+Przykładowo, parser powinien akceptować następujący kod:
+
+<pre class="code">
+A = zeros(5); # create 5x5 matrix filled with zeros
+D = A.+B' ;   # add element-wise A with transpose of B
+
+for j = 1:10 
+    print j;
+</pre>
+
+Przykładowe poprawne wejścia: <a href="example1.m">example1.m</a>, <a href="example2.m">example2.m</a>, <a href="example3.m">example3.m</a>
+
+
+</p>
+
+
+<ul>
+
+<li>Do rozwiązania zadania należy użyć generatora parserów <code>PLY</code>.
+
+<li>Rozpoznawany język powinien być spójny z przykładami z plików example<i>n</i>.m</a>.
+Wystąpienia białych znaków oraz sposób formatowania tekstu nie powinny wpływać na poprawność kodu.
+
+<li>Parser powinien rozpoznawać niepoprawny syntaktycznie kod wejściowy.
+W takim przypadku należy wypisać numer niepoprawnej linii oraz informację o wystąpieniu błedu.
+
+<li>Przy tworzeniu parsera należy wykorzystać stworzony skaner (<code>scanner.py</code>) na poprzednich zajęciach.
+
+<li>Można wykorzystać poniższe szablony
+<a href="Mparser.py">Mparser.py</a> oraz <a href="main.py">main.py</a>.
+
+<li>W zależności od typu nieterminala, należy zdefiniować odpowiednie klasy i struktury danych.
+(stała, zmienna, przypisanie, wyrażenie binarne, instrukcja warunkowa, lista instrukcji, itp.).
+
+</p>
+
+
+</body>
+</html>
