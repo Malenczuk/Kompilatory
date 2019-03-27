@@ -1,6 +1,6 @@
-import sys
-import ply.lex as lex
-import Lab1.scanner as scanner  # scanner.py is a file you create, (it is not an external library)
+#!/usr/bin/python
+import MLexer import MLexer
+
 
 if __name__ == '__main__':
 
@@ -12,13 +12,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     text = file.read()
-    lexer = scanner.lexer
-    lexer.input(text)  # Give the lexer some input
+    lexer = MLexer()
+    lexer.run(text)
 
-    # Tokenize
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break  # No more input
-        column = scanner.find_column(text, tok)
-        print("(%d,%d): %s(%s)" % (tok.lineno, column, tok.type, tok.value))
+    lexer.print_result()
