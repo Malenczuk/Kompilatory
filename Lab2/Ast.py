@@ -1,6 +1,3 @@
-class Expr: pass
-
-
 class BinaryExpression:
     def __init__(self, left, operator, right):
         self.left = left
@@ -134,15 +131,15 @@ class Error:
     pass
 
 
-class Program:
+class Block:
     def __init__(self, instruction):
         self.instructions = [instruction]
 
     def __repr__(self):
-        return "\n".join(map(str, self.instructions))
+        return "{\n" + "\n".join(map(str, self.instructions)) + "\n}"
 
 
-class Start:
+class Program:
     def __init__(self, program):
         self.program = program
 
